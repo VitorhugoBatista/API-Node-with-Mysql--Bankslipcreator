@@ -13,9 +13,9 @@ let payload = [
     iss = 'omundoedos.net',
     iat = new Date().toLocaleString(),
     exp = new Date().setMinutes(60).toLocaleString(),
-    acl = ['coordenador', 'participante'],
-    username = 'Thiago Adriano',
-    email = 'tadriano.net@gmail.com'
+    acl = ['admin', 'participante'],
+    username = 'Vitorhugo Batista',
+    email = 'vitorhugosjrp@gmail.com'
 ];
 
 payload = JSON.stringify(payload);
