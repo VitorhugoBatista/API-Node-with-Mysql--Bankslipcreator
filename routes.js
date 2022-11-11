@@ -29,10 +29,25 @@ var Bankslip = require('./client')
       
       router.post('/rest/bankslips', async (req, res) => {  //Esse método deve receber um novo boleto e inseri-lo em um 
         var bankslip = req.body;
+        bankslipValues = Object.values(bankslip);
+        console.log(bankslipValues)
+       for (const value of bankslipValues) {          
+          if (value === ""){
+          console.log(bankslip)
+          return res.status(422).json('Invalid bankslip provided.The possible reasons are: A field of the provided bankslip was null or with invalid values')
+       }}
+      //  if(bankslipValues == "") {                                                       //
+       //   console.log('Bankslip not provided in the request body');                   //
+      //    return res.status(422).json('Invalid bankslip provided.The possible reasons are: A field of the provided bankslip was null or with invalid values')    //
+     // }
+
+
         if(isEmpty(req.body)) {                                                       //
           console.log('Bankslip not provided in the request body');                   //
           return res.status(400).json('Bankslip not provided in the request body')    //
       }
+      
+
       
         try {
           const createBankslip = await Bankslip.create({       ///banco de dados para ser consumido pela própria API. Todos os campos são obrigatórios.
