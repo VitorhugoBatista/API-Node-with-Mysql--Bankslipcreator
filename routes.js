@@ -4,7 +4,8 @@ var isEmpty = require('lodash.isempty');
 const sequelize = require('./db');
 var config = require('./config');
 var Bankslip = require('./client')
-
+const jwt = require('jsonwebtoken');
+const SECRET = "DruidaFox";
 
     router.get('/', (req, res) => {
         req.getConnection(function (err, connection) {
