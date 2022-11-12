@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Code Review</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* basic style */
+    body {
+      font-family: Helvetica;
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    h2 {
+      font-size: 20px;
+      color: green;
+    }
+
+    h3 {
+      font-size: 16px;
+      padding-left: 5px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      white-space: pre-wrap;
+      margin: 0;
+    }
+
+    pre {
+      margin: 0
+    }
+
+    code {
+      border: 1px solid #999;
+      display: block;
+      white-space: pre-wrap;
+    }
+
+    /* links in headlines */
+    h3.lines-headline>a {
+      color: #005bbb;
+      text-decoration: none;
+    }
+
+    h3.lines-headline>a:hover {
+      text-decoration: underline;
+    }
+
+    /* table style */
+    table.review-table {
+      font-size: 14px;
+      padding-left: 10px;
+    }
+
+    table.review-table .caption {
+      font-weight: bold;
+      vertical-align: top;
+    }
+
+    table.review-table tr>td:first-child {
+      width: 120px
+    }
+
+    /* priority indicator */
+    .text>span:before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+      margin-left: -15px;
+    }
+
+    .text>span.prio-high:before {
+      background: #FF4500;
+    }
+
+    .text>span.prio-medium:before {
+      background: #FFD700;
+    }
+
+    .text>span.prio-low:before {
+      background: #9ACD32;
+    }
+
+    .text>span.prio-none:before {
+      background: #D3D3D3;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="main-headline">Code Review Results</h1>
+  <section class="file-section">
+    <h2 class="file-section-headline">\routes.js</h2>
+    <h3 class="lines-headline">
+      <a href="">Position: 19:7-19:75</a>
+    </h3>
+    <table class="review-table">
+      <tr class="row-priority">
+        <td class="caption">Priority</td>
+        <td class="text">
+          <span class="prio-3">3</span>
+        </td>
+      </tr>
+      <tr class="row-title">
+        <td class="caption">Title</td>
+        <td class="text">Não tem endpoint de login?</td>
+      </tr>
+      <tr class="row-category">
+        <td class="caption">Category</td>
+        <td class="text">Other</td>
+      </tr>
+      <tr class="row-description">
+        <td class="caption">Description</td>
+        <td class="text">
+          <p>Por que você não criou uma página de login? Como o usuário saberá onde fazer o login? 
+
+A api deverá ter um endpoint para fazer o login, pegar o jwt gerado e inserir ele nas requisições seguintes usando ele como o Bearer token.</p>
+        </td>
+      </tr>
+      <tr class="row-sha">
+        <td class="caption">SHA</td>
+        <td class="text">793cfcfd9fc334a3e2eb1c28ad93d5be21c44099</td>
+      </tr>
+    </table>
+  </section>
+</body>
+
+</html>
