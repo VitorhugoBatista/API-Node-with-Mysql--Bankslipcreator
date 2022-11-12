@@ -1,8 +1,5 @@
-
 const Sequelize = require('sequelize');
 const sequelize = require('./db');
-
-
 
 const Bankslip = sequelize.define('bankslip', {
     id: {
@@ -27,7 +24,18 @@ const Bankslip = sequelize.define('bankslip', {
         type: Sequelize.STRING,
         allowNull: false,
     }
-    
 })
 
-module.exports = Bankslip;
+const create = async (
+    due_date,
+    total_in_cents,
+    customer,
+    status
+) => await Bankslip.create({
+    due_date,
+    total_in_cents,
+    customer,
+    status
+});
+
+module.exports = create;
