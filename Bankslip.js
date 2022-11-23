@@ -27,15 +27,16 @@ const Bankslip = sequelize.define('bankslip', {
 })
 
 const create = async (
-    due_date,
-    total_in_cents,
-    customer,
-    status
+    
 ) => await Bankslip.create({
-    due_date,
-    total_in_cents,
-    customer,
-    status
+    due_date:due_date,
+    total_in_cents:total_in_cents,
+    customer:customer,
+    status:"PENDING"
 });
 
-module.exports = create;
+
+
+
+
+module.exports = {Bankslip,create};
