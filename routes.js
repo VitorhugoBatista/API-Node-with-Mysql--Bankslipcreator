@@ -5,18 +5,16 @@ var isEmpty = require('lodash.isempty');
 const jwt = require('jsonwebtoken');
 const SECRET = "druidafox";
 const path = require('path')
-const { Bankslip, create } = require('./Bankslip.js');
+const { Bankslip, create, payments, cancelBanklsip} = require('./Bankslip.js');
 const verifyJwt = require('./authtoken')
 const User = require('./dbuser');
 const bodyParser = require('body-parser');
 
 
-router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/public/loginpage.html'))
 
-});
 
 router.post('/login', async (req, res, next) => {
+  console.log
   const { email, password } = req.body;
 
   //esse teste abaixo deve ser feito no seu banco de dados
@@ -37,34 +35,49 @@ router.post('/login', async (req, res, next) => {
 
   }
 
-  else res.status(500).json({ message: 'Login inválido!' });
-
-
-  // user
-
-
-
+  res.status(500).json({ message: 'Login inválido!' });
 
 })
+router.post('/rest/bankslips/:id/payments',verifyJwt, async (req, res) => {
+  payment_date = req.body;
+  let id = req.params.id;
+  if (payment_date) {
+    res.status(204)
+  }
+  payments(payment_date, id)
+  res.end()
+})
+
+
+
+
 
 router.post('/logout', function (req, res) {
   res.json({ auth: false, token: null });
 })
 
 
-
+router.delete('/rest/bankslips/:id',verifyJwt, async(req,res)=>{
+let id = req.params.id
+try {
+  await cancelBanklsip(id)
+res.status(204).json("Bankslip canceled")
+} catch (error) {
+  res.status(404).send("Bankslip not found with the specified id")
+}
+})
 
 
 router.get('/rest/bankslips/', verifyJwt, async (req, res, next) => {
 
   const token = req.headers['x-access-token'];
 
-  var bankslip = await Bankslip.findByPk("09593bbd-0360-4e9d-acd1-252e90cccb37")
+  var bankslip = await Bankslip.findAll(bankslip)
   return res.json({ bankslip })
 
 })
 
-router.get('/rest/bankslips/:id',verifyJwt, async (req, res, next) => {
+router.get('/rest/bankslips/:id', verifyJwt, async (req, res, next) => {
   const id = req.params.id;
   console.log(id)
 
@@ -82,7 +95,7 @@ router.get('/rest/bankslips/:id',verifyJwt, async (req, res, next) => {
 })
 
 
-router.post('/rest/bankslips',verifyJwt, async (req, res) => {
+router.post('/rest/bankslips', verifyJwt, async (req, res) => {
 
   const bankslip = req.body
   due_date = bankslip.due_date;
