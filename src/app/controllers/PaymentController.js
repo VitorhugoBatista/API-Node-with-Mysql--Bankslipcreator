@@ -1,13 +1,16 @@
 import  Bankslip  from "../models/Bankslip.js";
-import payment from "../models/Payment.js";
+import Payment from "../models/Payment.js";
 
 class PaymentController {
-  async store(req, res) {
-    const payment = await payment.create(req.body);
+  async payment(req, res) {
+    console.log(req.body)
+    const payment = await Payment.create(req.body);
     return res.json(payment)
+  
+  
   }
   async index(req, res) {
-    const payments = await payment.findAll({
+    const payments = await Payment.findAll({
         attributes: [
             
         ],

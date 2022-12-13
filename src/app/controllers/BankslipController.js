@@ -17,7 +17,7 @@ class BankslipController {
       return res.json(bankslip)
     
     } catch (error) {
-
+      console.log(error)
     }
 
   }

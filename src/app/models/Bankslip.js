@@ -6,7 +6,7 @@ class Bankslip extends Model {
     super.init(
       {
         id: {
-          type: Sequelize.UUID,
+          type: Sequelize.UUIDV4,
           defaultValue: Sequelize.UUIDV4,
           primaryKey: true,
           autoIncrement:true,

@@ -11,10 +11,6 @@ module.exports = {
         type: DataTypes.DATEONLY,
         allowNull: true,
       },
-      fine: {
-        type: DataTypes.BIGINT,
-        allowNull: true,
-      },
       bankslipId: {
         type: DataTypes.STRING,
         allowNull: false,
