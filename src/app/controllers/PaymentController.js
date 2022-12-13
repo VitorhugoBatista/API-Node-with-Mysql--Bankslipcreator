@@ -9,12 +9,12 @@ class PaymentController {
   async index(req, res) {
     const payments = await payment.findAll({
         attributes: [
-            'id','nome', 'dtnascimento', 'telefone', 'bairro', 'cep'
+            
         ],
         include: [
             { 
-                model: Curso,
-                as: 'curso'
+                model: Bankslip,
+                as: 'Bankslip'
             }
         ]
     });
@@ -29,7 +29,7 @@ class PaymentController {
   async show(req, res) {
     let payment = await payment.findByPk(req.params.id, {
         attributes: [
-            'id','nome', 'dtnascimento', 'telefone', 'bairro', 'cep'
+            
         ],
         include: [
             { 
