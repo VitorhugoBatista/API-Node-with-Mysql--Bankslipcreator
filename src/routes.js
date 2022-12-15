@@ -8,8 +8,8 @@ routes.get('/rest/bankslips', BankslipController.show)
 routes.put('/bankslips/:id', BankslipController.update)
 routes.delete('/bankslips/:id', BankslipController.delete)
 
-routes.post('/payments', PaymentController.payment)
-routes.get('/payments/:id', PaymentController.show)
+routes.post('/rest/payments/:id', PaymentController.payment)
+//routes.get('/payments/:id', PaymentController.show)
 //routes.post('/apayments', PaymentController.store)
 routes.delete('/payments/:id', PaymentController.delete)
 

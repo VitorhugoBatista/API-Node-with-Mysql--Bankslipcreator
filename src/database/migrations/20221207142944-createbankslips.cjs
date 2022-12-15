@@ -1,29 +1,27 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, DataTypes) => {
+  up: (queryInterface, Sequelize) => {
   return queryInterface.createTable('bankslips', {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: true,
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
-      autoIncrement:true,
     },
     due_date: {
-      type: DataTypes.DATEONLY,
+      type: Sequelize.DATEONLY,
       allowNull: true,
     },
     total_in_cents: {
-      type: DataTypes.BIGINT,
+      type: Sequelize.BIGINT,
       allowNull: true,
     },
     customer: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: true,
     },
     status: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: true,
     },
   });
