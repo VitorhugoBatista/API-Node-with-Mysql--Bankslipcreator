@@ -1,40 +1,27 @@
+
 import Bankslip from "../models/Bankslip.js";
 import Payment from "../models/Payment.js";
 
 class PaymentController {
   async payment(req, res) {
     const id = req.params.id
+    console.log(id)
     const payment_date = req.body.payment_date;
-    
-    
-    if(req.body){
-      console.log("nobody")
+    if (!payment_date) {
+      res.status(204)
     }
     try {
-      const bankslip = await Bankslip.findOne({ where: { id: id } })
+      const bankslip = await Bankslip.findByPk(id)
       bankslip.status = "PAID"
-      bankslip.save;
+      bankslip.save();
+      const payment = await Payment.create({
+        payment_date: payment_date,
+        bankslip_id: id
+      });
+      return res.json(payment)
     } catch (error) {
-      //return res.status(404).json("Bankslip not found with the specified id")
+      return res.status(404).json('Message: Bankslip not found with the specified id')
     }
-    const payment = await Payment.create({payment_date:payment_date});
-    return res.json(payment)
-
-  }
-  
-  async index(req, res) {
-    const payments = await Payment.findAll({
-      attributes: [
-
-      ],
-      include: [
-        {
-          model: Bankslip,
-          as: 'Bankslip'
-        }
-      ]
-    });
-    return res.json(payments)
   }
 
   async delete(req, res) {
@@ -43,18 +30,10 @@ class PaymentController {
     return res.json(payment)
   }
   async show(req, res) {
-    let payment = await payment.findByPk(req.params.id, {
-      attributes: [
-
-      ],
-      include: [
-        {
-          model: Bankslip,
-          as: 'bankslip'
-        }
-      ]
-    })
-    return res.json(payment)
+    let bankslipid = req.params.id
+    let payment = await Bankslip.findAll({ where: { id: bankslipid } })
+    console.log(payment)
+    res.json(payment)
   }
 }
 export default new PaymentController();

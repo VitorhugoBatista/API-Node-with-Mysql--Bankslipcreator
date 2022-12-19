@@ -5,8 +5,8 @@ module.exports = {
   return queryInterface.createTable('bankslips', {
     id: {
       type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
-      primaryKey: true,
+          defaultValue: Sequelize.UUIDV4,
+          primaryKey: true,
     },
     due_date: {
       type: Sequelize.DATEONLY,

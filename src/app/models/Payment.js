@@ -1,19 +1,17 @@
 
 
 
-import Sequelize, { Model, UUIDV4 } from "sequelize";
-import Bankslip from "./Bankslip.js";
+import Sequelize, { Model } from "sequelize";
+
 
 class Payment extends Model {
   static init(sequelize) {
     super.init(
       {
         id: {
-          type: Sequelize.UUID,
-          defaultValue:UUIDV4,
-          allowNull: false,
+          type: Sequelize.INTEGER,
           primaryKey: true,
-          autoIncrement: true
+          autoIncrement:true
         },
         payment_date: {
           type: Sequelize.DATEONLY,
@@ -28,7 +26,8 @@ class Payment extends Model {
 
     return this;
   }
-  static associate() {
+ 
+  static associate(models){
     /**
      * Neste caso usaremos o belongsTo, mas dependendo da necessidade
      * temos outras opçoes
@@ -37,15 +36,15 @@ class Payment extends Model {
      * https://sequelize.org/master/class/lib/associations/belongs-to.js~BelongsTo.html
      */
 
-    this.belongsTo(Bankslip, {
-      foreignKey: 'id',
-      as: 'BankslipId',
-      
+    this.belongsTo(models.Bankslip, {
+        foreignKey: 'bankslip_id',
+        as: 'bankslips',
     });
-    this.hasOne(Bankslip)
-  }
 
 }
+
+}
+
 
 
 

@@ -9,7 +9,6 @@ class Bankslip extends Model {
           type: Sequelize.UUID,
           defaultValue: Sequelize.UUIDV4,
           primaryKey: true,
-          autoIncrement:true,
         },
         due_date: {
           type: Sequelize.DATEONLY,
@@ -30,21 +29,24 @@ class Bankslip extends Model {
         },
       },
       {
-        sequelize,modelName:'Bankslip',
+        sequelize,
         tableName: 'bankslips',
       }
     );
 
     return this;
-      
-  }
+    }
+    
   
 
- 
+  static associate(models) {
   
+  this.hasOne(models.Payment,{
+    foreignKey: 'bankslip_id',
+        as: 'payments',
+  });
+
+
 }
-
-
-
-
+}
 export default Bankslip

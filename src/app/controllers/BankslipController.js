@@ -1,11 +1,26 @@
 import Bankslip from "../models/Bankslip.js";
+import Payment from "../models/Payment.js";
 
 class BankslipController {
   async show(req, res) {
-    const bankslip = await Bankslip.findAll({ attributes: ['id'] });
-    return res.json(bankslip)
+    const bankslip = await Bankslip.findAll({include:[{as:'payments',model:Payment,attributes:['payment_date']}]} );
+    console.log(Object.entries(bankslip[1].payments.dataValues))
+    return res.json(bankslip[1].payments.payment_date)
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
   async create(req, res) {
     let { due_date, total_in_cents, customer } = req.body;
     try {
