@@ -4,7 +4,7 @@ import PaymentController from './app/controllers/PaymentController.js';
 const routes = Router();
 
 routes.post('/rest/bankslips', BankslipController.create)
-routes.get('/rest/bankslips', BankslipController.show)
+routes.get('/rest/bankslips/:id', BankslipController.show)
 routes.put('/bankslips/:id', BankslipController.update)
 routes.delete('/bankslips/:id', BankslipController.delete)
 

@@ -12,12 +12,13 @@ class PaymentController {
     }
     try {
       const bankslip = await Bankslip.findByPk(id)
-      bankslip.status = "PAID"
-      bankslip.save();
       const payment = await Payment.create({
         payment_date: payment_date,
         bankslip_id: id
       });
+      
+      bankslip.status = "PAID"
+      bankslip.save();
       return res.json(payment)
     } catch (error) {
       return res.status(404).json('Message: Bankslip not found with the specified id')
