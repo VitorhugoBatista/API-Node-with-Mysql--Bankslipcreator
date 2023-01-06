@@ -24,17 +24,5 @@ class PaymentController {
       return res.status(404).json('Message: Bankslip not found with the specified id')
     }
   }
-
-  async delete(req, res) {
-    let payment = await Payment.findByPk(req.params.id)
-    payment = await payment.destroy(req.body)
-    return res.json(payment)
-  }
-  async show(req, res) {
-    let bankslipid = req.params.id
-    let payment = await Bankslip.findAll({ where: { id: bankslipid } })
-    console.log(payment)
-    res.json(payment)
-  }
 }
 export default new PaymentController();
