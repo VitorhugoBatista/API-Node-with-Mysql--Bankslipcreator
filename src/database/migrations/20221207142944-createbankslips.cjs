@@ -6,23 +6,23 @@ module.exports = {
     id: {
       type: Sequelize.UUID,
           defaultValue: Sequelize.UUIDV4,
-          primaryKey: true,
+          primaryKey: false,
     },
     due_date: {
       type: Sequelize.DATEONLY,
-      allowNull: true,
+      allowNull: false,
     },
     total_in_cents: {
       type: Sequelize.BIGINT,
-      allowNull: true,
+      allowNull: false,
     },
     customer: {
       type: Sequelize.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     status: {
       type: Sequelize.STRING,
-      allowNull: true,
+      allowNull: false,
     },
   });
 },

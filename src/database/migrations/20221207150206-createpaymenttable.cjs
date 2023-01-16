@@ -7,12 +7,12 @@ module.exports = {
     return queryInterface.createTable('payments', {
       id: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
+        primaryKey: false,
         autoIncrement:true
       },
       payment_date: {
         type: Sequelize.DATEONLY,
-        allowNull: true,
+        allowNull: false,
       },
     })
   },
