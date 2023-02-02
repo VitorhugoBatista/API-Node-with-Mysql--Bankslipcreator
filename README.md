@@ -31,6 +31,8 @@ return:
  "customer":"Trillian Company",
  "status":"PENDING"
 }
+
+
 Http response expected
 ●	201 : Bankslip created
 ●	400 : Bankslip not provided in the request body
