@@ -24,3 +24,18 @@ Http response expected
 ○	A field of the provided bankslip was null or with invalid values
 
 ![image](https://user-images.githubusercontent.com/62615687/216598587-476f78ff-ce8e-401c-97fc-715f9170c976.png)
+
+READ
+
+View ticket details
+
+Endpoint: GET http://localhost:8080/rest/bankslips/{id}
+
+This API method must return a ticket filtered by id, if the ticket is late, the amount of the fine must be calculated.
+
+Rule for calculating the fine applied per day for late slips:
+
+● Up to 10 days: Fine of 0.5% (Simple Interest)
+● Over 10 days: 1% fine (Simple Interest)
+![image](https://user-images.githubusercontent.com/62615687/216628128-8755fe51-67bb-4e0b-8a7c-a8afc4fe603b.png)
+
