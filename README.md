@@ -16,22 +16,6 @@ This method must receive a new payment slip and insert it into a database to be 
 
 Sample of the request
 
-Request:
-{
- "due_date":"2018-01-01",
- "total_in_cents":"100000",
- "customer":"Trillian Company"
-}
-
-return:
-{
-"id":"84e8adbf-1a14-403b-ad73-d78ae19b59bf",
- "due_date":"2018-01-01",
- "total_in_cents":"100000",
- "customer":"Trillian Company",
- "status":"PENDING"
-}
-
 
 Http response expected
 ●	201 : Bankslip created
@@ -39,3 +23,4 @@ Http response expected
 ●	422 : Invalid bankslip provided.The possible reasons are:
 ○	A field of the provided bankslip was null or with invalid values
 
+![image](https://user-images.githubusercontent.com/62615687/216598587-476f78ff-ce8e-401c-97fc-715f9170c976.png)
