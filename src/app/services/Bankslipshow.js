@@ -1,48 +1,44 @@
-import { response } from "express";
+
 import moment from "moment/moment.js";
 import Bankslip from "../models/Bankslip.js";
 import Payment from "../models/Payment.js"
 import msg from "./UserConstants.js"
 
-async function checkFine(due_date, payment_date, total_in_cents) {
-  let fine = []
-  let formulefine = ((payment_date - due_date) / (1000 * 60 * 60 * 24)) // calcula a diferença de dia entre a data de vencimento do boleto e a data de pagamento//
-
-  if (formulefine >= 10) {
-    fine = + (total_in_cents * 0.005)  ///
+function calculateFine(total_in_cents, daysPastDue) {
+  let finePerDay;
+  if (daysPastDue <= 10) {
+    finePerDay = 0.005;
+  } else {
+    finePerDay = 0.01;
   }
-  else if (formulefine <= 10)
-  
-  { fine = + (total_in_cents * 0.001) }
-  console.log(fine)
-
-
-
+  return total_in_cents * finePerDay * daysPastDue;
 }
+
+
+
 
 
 
 async function show(req) {
-
-
   try {
-    const bankslip = await Bankslip.findByPk(req.id, { include: [{ as: 'payments', model: Payment }] });
+    const bankslip = await Bankslip.findByPk(req.id, { include: [{ as: 'payments', model: Payment }] })
+    if (bankslip.status === "CANCELLED"){return {message:msg.bankslipCancelled}}
+
+    const total_in_cents = bankslip.total_in_cents;
+    const due_date = moment(bankslip.due_date);
+    const payment_date = moment(bankslip.payments.payment_date);
+    console.log(due_date-payment_date)
+    const daysPastDue = ((payment_date - due_date)/(24*60*60*1000))
+    console.log(daysPastDue)
+    const fine = calculateFine(total_in_cents, daysPastDue);
+    console.log(`Fine amount: $${fine.toFixed(2)}`);
     
-      let total_in_cents = bankslip.total_in_cents
-      let due_date = moment(bankslip.due_date)
-      let payment_date = moment(bankslip.payment_date)
-      checkFine(due_date, payment_date, total_in_cents)
-     response.status(200) 
-    return 
-    
+    return {bankslip}
   } catch (error) {
-    response.status(error.status || 404);
-    return msg.bankslipNotFound
+    console.error(error);
+    //response.status(error.status || 404);
+    return {message:msg.bankslipNotFound}
   }
-
 }
-
-
-
 
 export default show;

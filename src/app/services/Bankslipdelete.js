@@ -2,9 +2,15 @@ import Bankslip from '../models/Bankslip.js';
 import msg from "../services/UserConstants.js"
 
 
-async function deletebankslip(req) {
-    let bankslip = await Bankslip.destroy({ where: { id: req.id } })
-    if (!bankslip) return ( msg.bankslipNotFound )
-    else return (msg.bankslipCancelled)
+async function deleteBankslip(req) {
+  const bankslip = await Bankslip.findByPk(req.id);
+  if (!bankslip) return msg.bankslipNotFound;
+  if(bankslip.status ==="CANCELLED") return bankslip
+
+  bankslip.status="CANCELLED";
+  bankslip.save()
+  return msg.bankslipCancelled;
 }
-  export default deletebankslip;
+
+export default deleteBankslip;
+

@@ -13,6 +13,4 @@ routes.delete('/rest/bankslips/:id', BankslipController.delete)
 routes.post('/rest/bankslip/payments/:id', PaymentController.payment)
 
 
-
-
 export default routes;
