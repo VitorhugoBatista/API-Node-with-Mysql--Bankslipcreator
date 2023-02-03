@@ -39,3 +39,11 @@ Rule for calculating the fine applied per day for late slips:
 ● Over 10 days: 1% fine (Simple Interest)
 ![image](https://user-images.githubusercontent.com/62615687/216628128-8755fe51-67bb-4e0b-8a7c-a8afc4fe603b.png)
 
+BANKSLIP PAYMENT
+
+This API method should change the status of the boleto to PAID.
+
+Endpoint: POST http://localhost:8080/rest/bankslips/{id}/payments
+
+![image](https://user-images.githubusercontent.com/62615687/216628727-42097669-76db-425e-8d76-d86e68f7ded5.png)
+
